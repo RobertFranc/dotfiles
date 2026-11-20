@@ -60,14 +60,15 @@
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
-    "python.defaultInterpreterPath": "/home/robert/.pyenv/shims/python",
+    //"python.defaultInterpreterPath": "/home/robert/.pyenv/shims/python", // 20261125 changed to "~/.lewagon/venvs/lewagon/bin/python",
     // "python.defaultInterpreterPath": "/home/robert/.pyenv/shims/python", // changed the tilde "~" to absolute path
+    "python.defaultInterpreterPath": "~/.lewagon/venvs/lewagon/bin/python",
     "python.formatting.provider": "yapf",
     "python.languageServer": "Pylance",
     "python.linting.enabled": false,
     "python.linting.flake8Enabled": false,
     "python.linting.pylintEnabled": false,
-    "python.terminal.activateEnvironment": false,
+    "python.terminal.activateEnvironment": true,
     "ruby.lint": {
         "rubocop": true
     },

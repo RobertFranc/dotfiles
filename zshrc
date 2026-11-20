@@ -19,8 +19,19 @@ ZSH_THEME="avit" # https://github.com/ohmyzsh/ohmyzsh/blob/31eca46ee3b94ca84a038
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
 plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search ssh-agent direnv)
 
+# 20261125 <<<<<<< ours
 # # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 # export HOMEBREW_NO_ANALYTICS=1
+# 20261125 =======
+# Add the omz ssh-agent plugin for WSL / Linux only (macOS handles this through Keychain in ~/.ssh/config)
+case "$(uname -s)" in
+  Darwin) ;;
+  Linux)  plugins+=('ssh-agent') ;;
+esac
+
+# (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
+export HOMEBREW_NO_ANALYTICS=1
+# 20261125 >>>>>>> theirs
 
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX=true
@@ -51,13 +62,19 @@ eval "$(pyenv init -)"
 # -----------------------------------------------------------------------------
 
 # Load pyenv (to manage your Python versions)
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# 20261125 <<<<<<< ours
+# 20261125 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🐍 $(pyenv version-name)]'
-type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🗾life😅code $(pyenv version-name)]'
+# 20261125 type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🗾life😅code $(pyenv version-name)]'
 # -----------------------------------------------------------------------------
 # 20260321 0830 TODO: resolve this message:
 # Default interpreter path 'C:\Users\user\anaconda3\python.exe' could not be resolved: Could not resolve interpreter path 'C:\Users\user\anaconda3\python.exe'
 # -----------------------------------------------------------------------------
+# 20261125 =======
+# Uncomment the next lines if you still run a pyenv based setup
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2> /dev/null)" && RPROMPT+='[🐍 $(pyenv version-name)]'
+# 20261125 >>>>>>> theirs
 # Load nvm (to manage your node versions)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -103,13 +120,14 @@ export EDITOR=code
 
 # Set ipdb as the default Python debugger
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+# 20261125 <<<<<<< ours
 export BROWSER="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe"
 export GH_BROWSER="'/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe'"
 # C:\Program Files\Mozilla Firefox\firefox.exe
 # export BROWSER="/mnt/c/Program\ Files\Mozilla Firefox\firefox.exe"
 # export GH_BROWSER="/mnt/c/Program\ Files\Mozilla Firefox\firefox.exe"
 export GOOGLE_APPLICATION_CREDENTIALS=~/code/RobertFranc/00-Setup/le-wagon-20240120-0d4fb56c6925.json
-
 
 # -----------------------------------------------------------------------------
 # 20260307:
@@ -125,5 +143,16 @@ fi
 export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk "{print \$2}"):0.0
 # -----------------------------------------------------------------------------
 
+# 20261125 keep both =======
 
+# Activate the Le Wagon Python venv and update the prompt
+LW_VENV="$HOME/.lewagon/venvs/lewagon"
+if [ -e $LW_VENV ]; then
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  source $LW_VENV/bin/activate
+  RPROMPT+='[🐍 $VIRTUAL_ENV_PROMPT]'
+fi
 
+# Hook direnv but only if direnv is installed
+if (( $+commands[direnv] )); then eval "$(direnv hook zsh)"; fi
+# 20261125 >>>>>>> theirs
