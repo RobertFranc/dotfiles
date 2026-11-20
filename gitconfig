@@ -22,6 +22,7 @@
   d = !git --no-pager diff
   dt  = difftool
   stat = !git --no-pager diff --stat
+  logadog = !git log --all --decorate --oneline --graph
 
   # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
   remoteSetHead = remote set-head origin --auto
@@ -62,3 +63,8 @@
 [user]
 	email = franz4biz@gmail.com
 	name = RobertFranc
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

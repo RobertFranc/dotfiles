@@ -8,7 +8,7 @@
     "editor.detectIndentation": false,
     "editor.fontSize": 14,
     "editor.guides.bracketPairs": true,
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.renderControlCharacters": true,
     "editor.rulers": [
@@ -60,7 +60,8 @@
     "notebook.diff.ignoreMetadata": true,
     "notebook.lineNumbers": "on",
     "notebook.markup.fontSize": 13,
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "python.defaultInterpreterPath": "/home/robert/.pyenv/shims/python",
+    // "python.defaultInterpreterPath": "/home/robert/.pyenv/shims/python", // changed the tilde "~" to absolute path
     "python.formatting.provider": "yapf",
     "python.languageServer": "Pylance",
     "python.linting.enabled": false,
@@ -77,7 +78,7 @@
     "telemetry.telemetryLevel": "off",
     "window.restoreWindows": "none",
     "window.newWindowDimensions": "maximized",
-    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreview": false,
     "workbench.iconTheme": "vscode-great-icons",
     "workbench.settings.editor": "json",
     "workbench.settings.openDefaultSettings": true,
